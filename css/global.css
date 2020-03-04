@@ -178,6 +178,7 @@ body {
 
 header {
   height: 96px;
+  min-width: 1080px;
   padding: 0 30px;
   display: flex;
   justify-content: space-between; }
