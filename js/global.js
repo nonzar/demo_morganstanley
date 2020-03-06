@@ -1,26 +1,23 @@
-$(() => {
-  let navOpenQueen = [],
-    noHover = false
-  $('.ui-nav>ul>li[data-hover=1]').hover(function () {
+let navOpenQueen = [],
+  noHover = false
+document.querySelectorAll('.ui-nav>ul>li[data-hover="1"]').forEach(e => {
+  e.addEventListener('mouseenter', function () {
     if (noHover) return
     navOpenQueen.forEach(e => clearTimeout(e))
     navOpenQueen = []
-    $('.ui-nav>ul>li[data-hover=1]').removeClass('hover')
+    document.querySelectorAll('.ui-nav>ul>li[data-hover="1"]').forEach(e => e.classList.remove('hover'))
     navOpenQueen.push(setTimeout(() => {
-      $(this).addClass('hover')
+      e.classList.add('hover')
     }, 300))
-  }, function () {
+  })
+  e.addEventListener('mouseleave', function () {
     if (noHover) return
     setTimeout(() => {
-      $(this).removeClass('hover')
+      e.classList.remove('hover')
     }, 300)
   })
-  $('.ui-nav>ul>li.search').click(function () {
-    $(this).toggleClass('hover')
-    if ($(this).hasClass('hover')) {
-      noHover = true
-    } else {
-      noHover = false
-    }
-  })
+})
+document.querySelector('.ui-nav>ul>li.search>a').addEventListener('click', function (e) {
+  e.currentTarget.parentNode.classList.toggle('hover')
+  noHover = e.currentTarget.parentNode.classList.contains('hover')
 })
